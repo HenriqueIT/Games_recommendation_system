@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "recommendation-games"
+version = "0.1.0"
+description = ""
+authors = ["henrique <taguissa@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.1"
+sqlalchemy = "^2.0.29"
+selenium = "4.2.0"
+scikit-learn = "^1.4.1.post1"
+openpyxl = "^3.1.2"
+streamlit = "^1.33.0"
+psycopg2-binary = "^2.9.9"
+
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
