@@ -44,4 +44,4 @@ COPY . /app
 EXPOSE 8501
 
 # Command to run the Streamlit app
-CMD ["streamlit", "run", "recommendation_games/main_app.py"]
+CMD ["streamlit", "run", "recommendation_games/main.py"]
