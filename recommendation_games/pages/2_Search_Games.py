@@ -5,10 +5,10 @@ import streamlit as st
 
 st.set_page_config(page_title="Search Games", page_icon="🎮")
 
-st.title('Search Games')
+st.title('Search PS4 Games')
 
-st.markdown("""In this page, you can find the game by genres (select up to 3), title, release date and score. 
-            Apply filters in the sidebar. The results will be displayed below.""")
+st.markdown("""In this page, you can find the game by genres (select up to 3), title, release year and score. 
+            Apply filters in the sidebar (on the left side) to narrow the list down. The results will be displayed below.""")
 
 st.sidebar.header("Apply filters")
 
@@ -21,8 +21,8 @@ def rename_columns(df):
     df = df.rename(columns = dict_rename)
     return df
 
-#df_all = pd.read_csv('games.csv')
-df_all = pd.read_csv('recommendation_games/games.csv')
+df_all = pd.read_csv('games.csv')
+#df_all = pd.read_csv('recommendation_games/games.csv')
 
 # Fill empty values with emoty string
 df_all = df_all.fillna('')
@@ -47,9 +47,9 @@ keyword_match = (df_all['Game'].str.lower().str.contains(keyword.lower()))
 st.sidebar.markdown("### Genres")
 
 unique_genres = (pd.concat([df_all['Genre1'], df_all['Genre2'], df_all['Genre3']])).unique()
-unique_genres = unique_genres[unique_genres != '']
+unique_genres_sorted = np.sort(unique_genres[unique_genres != ''])
 
-target_genres = st.sidebar.multiselect('Select Genres (up to 3)', options=list(unique_genres))
+target_genres = st.sidebar.multiselect('Select Genres (up to 3)', options=list(unique_genres_sorted))
 
 # Create an empty mask initially set to True
 genre_match = np.ones(len(df_all), dtype=bool)

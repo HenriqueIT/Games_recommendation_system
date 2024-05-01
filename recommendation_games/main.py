@@ -1,6 +1,5 @@
 from datetime import datetime
 import pandas as pd
-import psycopg2
 from sqlalchemy import create_engine
 from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.metrics.pairwise import cosine_similarity

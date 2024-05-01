@@ -7,7 +7,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Recommendation system", page_icon="🎮")
 
-st.title('Game Recommendations')
+st.title('Game Recommendations for PS4')
 
 st.markdown("""In this page we recommend 10 games based on the game you select in the box. 
             If you are not sure about the game to use as a reference, you can search
@@ -22,8 +22,8 @@ def rename_columns(df):
     df = df.rename(columns = dict_rename)
     return df
 
-#df_all = pd.read_csv('games.csv')
-df_all = pd.read_csv('recommendation_games/games.csv')
+df_all = pd.read_csv('games.csv')
+#df_all = pd.read_csv('recommendation_games/games.csv')
 
 # Fill empty values with emoty string
 df_all = df_all.fillna('')
@@ -56,18 +56,21 @@ if selected_game is not None:
 
     index_game = df_all.loc[(df_all['Game'] == selected_game)].index[0]
 
+    df_all['Similarity'] = round(pd.Series(cosine_sim[index_game])*100, 0).astype(int)
+
     #st.subheader('Detailed info on selected videogame')
     st.markdown('''
                 #### Selected videogame:
                 ''')
     st.table(df_all.loc[[index_game], ['Rank','Game','Genre1', 'Genre2', 'Genre3', 'Score']])
 
-    score_series_w_input = pd.Series(cosine_sim[index_game]).sort_values(ascending = False)
-    score_series_not_input = score_series_w_input.drop(index_game)
-    top_10_indices = list(score_series_not_input.iloc[:10].index)
+    df_all = df_all.drop(index = index_game, axis = 0)
+    df_all_top_10 = df_all.sort_values(by=['Similarity', 'Score'], ascending=[False, False])[:10]
+
+    df_all_top_10['Similarity'] = df_all_top_10['Similarity'].astype(str) + '%'
 
     st.markdown('''
                 #### Top 10 recommendations!
                 ''')
-    # Hide the index of a dataframe
-    st.table(df_all.loc[top_10_indices, ['Rank','Game','Genre1', 'Genre2', 'Genre3', 'Score']].sort_values(by = 'Rank', ascending = True))
+
+    st.table(df_all_top_10[['Rank','Game','Genre1', 'Genre2', 'Genre3', 'Score', 'Similarity']])
