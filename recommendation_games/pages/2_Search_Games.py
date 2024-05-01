@@ -21,8 +21,8 @@ def rename_columns(df):
     df = df.rename(columns = dict_rename)
     return df
 
-df_all = pd.read_csv('games.csv')
-#df_all = pd.read_csv('recommendation_games/games.csv')
+#df_all = pd.read_csv('games.csv')
+df_all = pd.read_csv('recommendation_games/games.csv')
 
 # Fill empty values with emoty string
 df_all = df_all.fillna('')
