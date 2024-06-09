@@ -20,11 +20,11 @@ This application is running on Render: https://games-recommendation-system.onren
 
 ![Flow](./Images/flow.png)
 
-This project consist of 3 main parts:
+This project consists of 3 main parts:
 
 - **Web Scraping**: Collect data on video games including: the name of videogames, release dates, genres and scores. 
 
-- **Streamlit application**: Build a user-friendly interface using Streamlit to show the result. The application will allow users to select a game and view similar game suggestions based on the scraped data.
+- **Application**: Build a user-friendly interface using Streamlit to show the result. The application will allow users to select a game and view similar game suggestions based on the scraped data.
 
 - **Deployment**: Deploying the Streamlit application for easy access and use.
 
