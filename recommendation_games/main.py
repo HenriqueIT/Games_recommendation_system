@@ -5,12 +5,15 @@ from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.metrics.pairwise import cosine_similarity
 import streamlit as st
 
+# Title and description of the web application
 st.write("# Welcome to Game Recommendation system! 👋")
 
 st.markdown(
     """
     The main purpose of this web application is to **suggest videogames** on PS4 based on their **genres** and **scores**.
     """)
+
+# Explanation of the main features of the application
 st.markdown(
     """
     ### 2 Features

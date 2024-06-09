@@ -38,7 +38,7 @@ COPY --from=builder /app/requirements.txt /app/
 RUN pip install -r requirements.txt
 
 # Copy the application code into the container
-COPY . /app
+COPY . /app 
 
 # Expose the port the app runs on
 EXPOSE 8501

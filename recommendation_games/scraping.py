@@ -20,6 +20,7 @@ def get_data(driver, base_url, page_number):
         tuple: A tuple containing lists of game names, release dates, genres, and scores.
     """
 
+    # Construct the URL for the current page
     url = f"{base_url}{page_number}"
     driver.get(url)
 
@@ -37,7 +38,7 @@ def get_data(driver, base_url, page_number):
         EC.presence_of_all_elements_located((By.XPATH, '//*[contains(@class, "text-center font-score tracking-wider text-skin-primary shadow-md shadow-black/20")]'))
     )
 
-    # Stores names, dates, genres and scores in lists
+    # Extract the text from each element and store them in lists
     game_names = [element.text for element in game_names]
     dates = [element.text for element in dates]
     genres = [element.text for element in genres]
@@ -73,8 +74,9 @@ def scrape_pages(driver, base_url, start_page, end_page):
             
         except Exception as e:
             print(f"Error on page {page_number}: {e}")
+            continue  # Skip this page if an error occurs
 
-        # Extend the list of each element
+        # Extend the lists with data from the current page
         game_names.extend(page_game_names)
         dates.extend(page_dates)
         genres.extend(page_genres)
@@ -96,44 +98,48 @@ def create_dataframe(game_names, dates, genres, scores):
         DataFrame: A DataFrame containing the scraped data.
     """
 
-    # Create data frames
+    # Create data frames for each element
     df_games = pd.DataFrame({'Game': game_names})
+    
+    # Convert date strings to datetime objects and then to a formatted string
     date_objects = [datetime.strptime(date_str.split('\n')[-1], '%b %d, %Y').strftime('%d/%m/%Y') for date_str in dates]
-
     df_dates = pd.DataFrame({'Release': date_objects})
 
+    # Split genre strings into separate columns
     genre_lists = [string.split('\n') for string in genres]
     df_genre = pd.DataFrame(genre_lists, columns=['genre1', 'genre2', 'genre3'])
 
+    # Convert score strings to floats
     score_lists = [float(num) for num in scores]
     df_score = pd.DataFrame({'Score': score_lists})
 
-    # Concatenate horizontally
+    # Concatenate all data frames horizontally
     df_all = pd.concat([df_games, df_dates, df_genre, df_score], axis=1)
-    df_all.insert(0, 'Rank', df_all.index + 1)
+    df_all.insert(0, 'Rank', df_all.index + 1)  # Add a Rank column
 
     return df_all
 
 def main():
     
-    # Define constants
+    # Define constants for the scraping
     base_url = "https://whatoplay.com/ps4/best/?pageNum="
     start_page = 1
     end_page = 83
 
-    # Specify the path to the driver
+    # Specify the path to the Chrome WebDriver
     driver_path = 'PATH_TO_THE_WEBDRIVER'
     driver = webdriver.Chrome(driver_path)
 
-    # Scrape data
+    # Scrape data from the specified range of pages
     game_names, dates, genres, scores = scrape_pages(driver, base_url, start_page, end_page)
 
-    # Create DataFrame
+    # Create a DataFrame from the scraped data
     df_games = create_dataframe(game_names, dates, genres, scores)
 
     # Close the browser window
     driver.quit()
 
+    # Save the DataFrame to a CSV file
     df_games.to_csv('games.csv', index=False)
 
 if __name__ == "__main__":
