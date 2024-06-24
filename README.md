@@ -1,6 +1,15 @@
 # Games Recommendation System for PS4
 
-This application is running on Render: https://games-recommendation-system.onrender.com
+This application is running on **Render**: https://games-recommendation-system.onrender.com
+
+The **mainpage** of this app looks like the image below !
+
+**Note**: The app might not be working as there is a usage limit for Free tier on **Render**.
+
+![mainpage](./Images/mainpage.jpg)
+
+
+
 
 ## Goals
 
