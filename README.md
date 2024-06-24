@@ -6,7 +6,7 @@ The **mainpage** of this app looks like the image below !
 
 **Note**: The app might not be working as there is a usage limit for Free tier on **Render**.
 
-![mainpage](./Images/mainpage.jpg)
+![mainpage](./Images/mainpage.JPG)
 
 
 
