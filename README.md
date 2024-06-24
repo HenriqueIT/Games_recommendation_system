@@ -10,7 +10,6 @@ The **mainpage** of this app looks like the image below !
 
 
 
-
 ## Goals
 
 - **Develop a Recommendation System:** Create an application that suggests similar PS4 games based on the one you choose. 
