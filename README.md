@@ -8,6 +8,11 @@ The **mainpage** of this app looks like the image below !
 
 ![mainpage](./Images/mainpage.JPG)
 
+## Context
+
+- I was interested in understanding how recommendation systems work on platforms like Amazon and Netflix.
+- And I was struggling to find videogames that appeal to me.
+- Based on these points, I thought it would be fun to build a game recommendation system for PS4.
 
 
 ## Goals
@@ -40,7 +45,9 @@ This project consists of 3 main parts:
 
 - The recommendation system is working as expected, but the genres should be further cleaned to maintain consistency. For example, there are games categorized as 'JRPG' and 'RPG'. In reality, 'JRPG' is a subset of 'RPG' and should not be considered a separate category.
 
-- This system suggests similar games based only on their genres.  It would be a more accurate application if title and release dates were included as parameters.
+- This system suggests similar games based only on their genres.  It would be a more accurate application if title, release dates and game descriptions were included as parameters.
+
+- Some video games were not labeled as I expected. For instance, 'Persona 5 Royal' is essentially 'Persona 5' with DLC, so these two games should share the same genres. However, 'Persona 5 Royal' is categorized as RPG, JRPG, and Anime, while 'Persona 5' is labeled as RPG, Simulation, and JRPG. Since the criteria for labeling games aren't clear, it would be beneficial to include other elements like titles and descriptions in the recommendation process.
 
 
 
